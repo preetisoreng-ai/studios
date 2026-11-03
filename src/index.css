@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "./theme-tokens.css";
+
+/* NucliOS theme (tokens + components) and the Studios page theme.
+   Components never carry colour; it all comes from these theme files. */
+@import "./theme/theme-nuclios.css";
+@import "./theme/studios.css";
+
+/* Two-column desktop on a screen too short for the Figma layout: Home compresses
+   to fit above the fold (fit), and a little further on very short screens (fit-sm). */
+@custom-variant fit (@media (min-width: 80rem) and (max-height: 1000px));
+@custom-variant fit-sm (@media (min-width: 80rem) and (max-height: 780px));
+
+@theme {
+  --radius-*: initial;
+  --radius-none: var(--radius-none);
+  --radius-sm: var(--radius-component-set-1);
+  --radius-md: var(--radius-component-set-2);
+  --radius-lg: var(--radius-container-set-2);
+  --radius-xl: var(--radius-container-set-3);
+  --radius-full: var(--radius-pill);
+
+  --color-border: var(--color-border-subtle);
+  --color-input: var(--color-background-neutral);
+  --color-ring: var(--color-border-neutral-focused);
+  --color-background: var(--color-background-neutral);
+  --color-foreground: var(--color-text-neutral);
+
+  --color-primary: var(--color-background-primary);
+  --color-primary-foreground: var(--color-text-onprimary);
+  --color-secondary: var(--color-background-secondary);
+  --color-secondary-foreground: var(--color-text-onsecondary);
+  --color-destructive: var(--color-background-negative);
+  --color-destructive-foreground: var(--color-text-inverse);
+  --color-muted: var(--color-background-subtle);
+  --color-muted-foreground: var(--color-text-neutral-muted);
+  --color-accent: var(--color-background-primary);
+  --color-accent-foreground: var(--color-text-onprimary);
+  --color-popover: var(--color-background-neutral);
+  --color-popover-foreground: var(--color-text-neutral);
+  --color-card: var(--color-background-neutral);
+  --color-card-foreground: var(--color-text-neutral);
+
+  --font-sans: var(--font-family-graphik);
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+}
+
+html,
+body {
+  background-color: var(--studios-page-bg);
+  color: var(--color-text-neutral);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

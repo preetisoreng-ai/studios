@@ -1,0 +1,899 @@
+/* 🎨 STUDIOS PAGE THEME
+   Values from the Figma "Studios – Final files" that have no NucliOS semantic token yet
+   (glass surfaces, pastel count badges, tile illustrations, Graphik Compact display type).
+   Kept here — never in components — so they can be promoted into the NucliOS tokens later.
+   Light values are the Figma values; dark values are derived. */
+
+.theme-nuclios {
+  --studios-page-bg: var(--color-background-neutral);
+  --studios-inner-bg: var(--color-background-subtle);
+  --studios-nav-bg-inner: var(--color-background-neutral);
+  --studios-glass-overlay: linear-gradient(
+    125.43deg,
+    rgb(248 246 242 / 0.2) 2.32%,
+    rgb(248 246 242 / 0.4) 100.61%
+  );
+  --studios-bg-layer-filter: none;
+
+  --studios-card: var(--color-background-neutral);
+  /* Tile hover lift: wide, low-opacity, ink-tinted (shadow-4 read as too harsh here). */
+  --studios-card-hover-shadow:
+    0 1px 3px rgb(34 0 71 / 0.03), 0 8px 20px -6px rgb(34 0 71 / 0.07),
+    0 22px 48px -16px rgb(34 0 71 / 0.1);
+  --studios-row: linear-gradient(var(--color-surface-30), var(--color-surface-30));
+  --studios-row-hover: var(--color-surface-70);
+  --studios-tab-selected: var(--color-background-neutral);
+  --studios-custom: var(--color-surface-30);
+  --studios-custom-hover: var(--color-background-neutral);
+  --studios-custom-border-hover: var(--color-border-primary-subtle);
+  --studios-filterbar: var(--color-surface-30);
+  --studios-filter-btn: var(--color-surface-30);
+  --studios-filter-btn-border: var(--color-border-primary);
+  --studios-empty: var(--color-surface-30);
+
+  --studios-title: var(--color-text-neutral);
+  /* Applications landing (Figma 9465:3450) */
+  --studios-app-card: var(--color-surface-70);
+  /* All Features (Figma 40000002:12694) */
+  --studios-explore-bg: var(--color-background-secondary);
+  --studios-feat-group-strong: var(--color-text-neutral-muted);
+  --studios-feat-viewmore: var(--color-text-neutral-subtle);
+  --studios-feat-tile-name: var(--color-text-neutral);
+  /* Feature details panel — Opt 2 (Figma 73333:191) */
+  --studios-detail-panel: var(--color-background-neutral);
+  --studios-detail-panel-shadow: 0 8px 32px rgb(30 20 41 / 0.06);
+  --studios-detail-text: var(--color-text-neutral-muted);
+  --studios-detail-more: var(--color-text-neutral);
+  --studios-detail-btn-border: var(--color-border-subtle);
+  --studios-detail-btn-text: var(--color-text-primary-pressed);
+  --studios-detail-btn-hover: var(--color-background-primary-muted);
+  --studios-explore-subtitle: var(--color-text-neutral-subtle);
+  --studios-explore-studio-tile: var(--color-background-primary-selected);
+  --studios-explore-studio-icon: var(--color-icons-primary-selected);
+  --studios-explore-tile: var(--color-surface-70);
+  --studios-explore-tile-hover: var(--color-background-neutral);
+  --studios-explore-tile-border: var(--color-border-neutral-inverse);
+  --studios-explore-tile-shadow: 0 6px 18px rgb(30 20 41 / 0.06);
+  --studios-explore-tile-shadow-hover: 0 10px 26px rgb(60 30 120 / 0.12);
+  --studios-explore-tile-ring: var(--color-border-primary-subtle);
+  --studios-explore-panel: var(--color-background-primary-muted);
+  --studios-explore-panel-border: var(--color-border-neutral-inverse);
+  --studios-explore-panel-text: var(--color-text-neutral-subtle);
+  --studios-explore-btn: var(--color-border-primary);
+  --studios-explore-btn-text: var(--color-text-primary-pressed);
+  --studios-explore-btn-ai: var(--color-background-primary-selected);
+  --studios-explore-btn-ai-hover: var(--color-background-primary-muted);
+  --studios-feat-heading: var(--color-text-neutral);
+  --studios-feat-title: var(--color-text-neutral);
+  --studios-feat-desc: var(--color-text-neutral-muted);
+  --studios-feat-group: var(--color-text-neutral-muted);
+  --studios-feat-rule: var(--color-border-subtle);
+  --studios-feat-pop: var(--color-background-neutral);
+  --studios-feat-pop-shadow: 0 4px 20.5px var(--color-transparency-neutral-neutral-900-12);
+  --studios-feat-beta: var(--color-background-subtle);
+  --studios-feat-beta-border: var(--color-border-muted);
+  --studios-feat-beta-text: var(--color-text-neutral);
+  --studios-feat-ai: var(--color-text-primary);
+  --studios-feat-btn: var(--color-text-primary-selected);
+  --studios-feat-btn-hover: var(--color-background-primary-muted);
+  --studios-feat-btn-ai: var(--color-background-primary-muted);
+  --studios-feat-btn-ai-hover: var(--color-background-primary-selected);
+  --studios-app-title: var(--color-text-neutral);
+  --studios-app-desc: var(--color-text-neutral-muted);
+  --studios-app-desc-hover: var(--color-text-neutral);
+  --studios-app-subtitle: var(--color-text-neutral-muted);
+  --studios-app-tag: var(--color-background-secondary);
+  --studios-app-tag-hover: var(--color-surface-70);
+  --studios-app-tag-text: var(--color-text-neutral-muted);
+  --studios-app-icon-hover-bg: var(--color-background-neutral);
+  --studios-app-icon-hover: var(--color-icons-neutral);
+  --studios-app-hover-shadow: 0 0 12px rgb(91 90 113 / 0.16);
+  --studios-apps-filter-border: var(--color-border-subtle);
+  --studios-apps-version: var(--color-text-neutral-muted);
+  --studios-view-btn: var(--color-surface-70);
+  --studios-view-btn-border: var(--color-border-neutral-inverse);
+  --studios-view-icon: var(--color-icons-primary-selected);
+  --studios-view-btn-on: var(--color-background-neutral);
+  --studios-view-btn-shadow: 0 1px 3px rgb(34 0 71 / 0.12);
+  /* Illustration palette — Figma artwork colours with no NucliOS token equivalent. */
+  --studios-glow-from: #f9f6ff;
+  --studios-glow-to: #fdf5ea;
+  --studios-glow-edge: rgb(248 250 214 / 0.1);
+  --studios-glow-row: linear-gradient(
+    100deg,
+    #f9f6ff 0%,
+    #f6e6fb 22%,
+    #fdf5ea 45%,
+    #ece6ff 68%,
+    #fbeef6 85%,
+    #f9f6ff 100%
+  );
+  --studios-app-peach: #f59145;
+  --studios-app-teal: #5ec7d7;
+  --studios-app-lavender: #dfa2f2;
+  --studios-app-mint: #53caa5;
+  --studios-app-cobalt: #3b9bef;
+  --studios-app-olive: #adc959;
+  --studios-app-brown: #c49855;
+  --studios-app-pink: #f081c4;
+  --studios-welcome: var(--color-text-neutral);
+  --studios-tab-text: var(--color-text-neutral);
+  --studios-row-icon: var(--color-icons-neutral);
+  --studios-topbar-icon: var(--color-icons-neutral-subtle);
+  --studios-filter-label: var(--color-text-neutral-muted);
+  --studios-filter-divider: var(--color-border-neutral-selected);
+  --studios-filter-reset-border: var(--color-border-neutral-inverse);
+  --studios-footer-version: var(--color-text-inverse);
+  --studios-filterbar-gradient: linear-gradient(var(--color-surface-30), var(--color-surface-30));
+  /* WORKSPACES pill */
+  --studios-ws-bg: var(--color-surface-30);
+  --studios-ws-border: var(--color-transparency-neutral-neutral-900-20);
+  --studios-ws-shadow: 0 2px 5px rgb(120 12 239 / 0.2);
+  --studios-ws-dot: var(--color-background-primary-hover);
+  --studios-desc: var(--color-text-neutral-muted);
+  --studios-row-text: var(--color-text-neutral);
+  --studios-row-meta: var(--color-text-neutral-muted);
+  --studios-link: var(--color-text-neutral);
+  --studios-link-icon: var(--color-icons-primary);
+  --studios-tab-muted: var(--color-text-neutral-disabled);
+  --studios-filter-icon: var(--color-icons-neutral);
+
+  --studios-badge-text: var(--color-text-neutral);
+  --studios-badge-yellow: #fae4be;
+  --studios-badge-yellow-border: #f7d79d;
+  --studios-badge-pink: #f9ecf7;
+  --studios-badge-pink-border: #ecc7e8;
+  --studios-badge-blue: var(--color-background-information-subtle);
+  --studios-badge-blue-border: var(--color-border-information-subtle);
+  --studios-badge-purple: var(--color-background-primary-selected);
+  --studios-badge-purple-border: var(--color-border-primary-subtle);
+
+  /* Tile illustrations (Figma gradients) */
+  --studios-art-orange: linear-gradient(
+    191.7deg,
+    rgb(253 133 2 / 0.8) 6.28%,
+    rgb(239 70 3 / 0.8) 93.5%
+  );
+  --studios-art-orange-glass: rgb(253 174 58 / 0.42);
+  --studios-art-orange-shadow: 0 2.585px 25.846px rgb(234 115 50 / 0.3);
+  --studios-art-blue: linear-gradient(
+    195.71deg,
+    rgb(84 198 251 / 0.8) 6.28%,
+    rgb(57 47 248 / 0.8) 76.31%
+  );
+  --studios-art-highlight: inset 0 2.585px 2.585px rgb(255 255 255 / 0.25);
+  --studios-art-white: var(--color-icons-onprimary);
+  --studios-art-generic: linear-gradient(
+    200deg,
+    rgb(211 175 250 / 0.9) 6%,
+    rgb(119 69 173 / 0.85) 94%
+  );
+  --studios-star: #f5c443;
+
+  --studios-ink: var(--color-text-primary-pressed);
+  --studios-ink-hover: var(--color-background-primary-hover);
+  --studios-on-ink: var(--color-text-onprimary);
+  --studios-display: "Graphik Compact", "Inter Tight", "Inter", system-ui, sans-serif;
+  --studios-body-serif: "Roboto", var(--font-family-graphik);
+}
+
+.dark .theme-nuclios,
+.theme-nuclios.dark {
+  --studios-app-icon-hover-bg: var(--color-surface-70-static);
+  --studios-app-icon-hover: var(--color-icons-primary-static);
+  --studios-page-bg: var(--color-surface-surface-1);
+  --studios-inner-bg: var(--color-surface-surface-1);
+  --studios-nav-bg-inner: var(--color-surface-surface-2);
+  --studios-glass-overlay: linear-gradient(
+    125.43deg,
+    rgb(10 10 10 / 0.25) 2.32%,
+    rgb(10 10 10 / 0.45) 100.61%
+  );
+  /* The Figma background is white with coloured blobs; inverting keeps the blobs and turns the base dark. */
+  --studios-bg-layer-filter: invert(1) hue-rotate(180deg) brightness(0.9);
+
+  --studios-card-hover-shadow:
+    0 1px 3px rgb(0 0 0 / 0.18), 0 8px 20px -6px rgb(0 0 0 / 0.28),
+    0 22px 48px -16px rgb(0 0 0 / 0.4);
+  --studios-row-hover: var(--color-background-neutral-hover);
+  --studios-custom-hover: var(--color-background-neutral-hover);
+
+  --studios-app-card: var(--color-background-neutral);
+  --studios-explore-bg: var(--color-surface-surface-1);
+  --studios-detail-panel-shadow: none;
+  --studios-explore-tile-shadow: none;
+  --studios-explore-tile-shadow-hover: 0 10px 26px rgb(0 0 0 / 0.35);
+  --studios-feat-pop-shadow: 0 6px 24px rgb(0 0 0 / 0.45);
+  --studios-feat-ai: var(--color-text-primary-selected);
+  --studios-app-desc-hover: var(--color-text-inverse);
+  --studios-view-btn: var(--color-surface-30-static);
+  --studios-view-btn-shadow: none;
+  --studios-topbar-icon: var(--color-icons-neutral);
+  --studios-ws-shadow: 0 2px 5px rgb(0 0 0 / 0.35);
+  --studios-link-icon: var(--color-icons-primary-selected);
+
+  --studios-ink: var(--color-text-primary-selected);
+  --studios-badge-yellow: #4a3510;
+  --studios-badge-yellow-border: #7a5a1c;
+  --studios-badge-pink: #43183d;
+  --studios-badge-pink-border: #74326a;
+  --studios-badge-purple: var(--color-background-primary-muted);
+  --studios-badge-purple-border: var(--color-border-primary);
+}
+
+/* Display type from the Figma (Graphik Compact) — not in the Bento type scale. */
+.studios-type-welcome {
+  font-family: var(--studios-display);
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.studios-type-tile-title {
+  font-family: var(--studios-display);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.studios-type-tile-desc {
+  font-family: var(--studios-body-serif);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.studios-type-caps {
+  font-family: var(--studios-display);
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 1.5px;
+}
+
+/* Filter bar: the NucliOS "filled" inline dropdown sits flush on the glass bar. */
+.studios-filterbar {
+  --color-background-subtle: transparent;
+  --color-background-subtle-hover: var(--studios-row-hover);
+}
+/* Figma "Combo": 16px Graphik label (grey, divider on the right) and 16px medium value. */
+.studios-filterbar .nuclios-type-body-small-regular {
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--studios-filter-label);
+}
+.studios-filterbar .nuclios-type-body-default-regular {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--studios-ink);
+}
+
+/* Monochrome Figma icons rendered as masks so they follow the text colour. */
+.studios-mask {
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: var(--mask) center / contain no-repeat;
+  mask: var(--mask) center / contain no-repeat;
+}
+
+/* Top-bar icon buttons (bell, profile): micro-interactions.
+   Hover: the hover circle fades in and the icon picks up the ink colour; the bell
+   gives a short ring and the profile lifts slightly. Press: a quick squeeze.
+   Open (popover/menu showing): stays in the ink colour. The global
+   prefers-reduced-motion rule in index.css turns all of this off. */
+.studios-icon-btn {
+  transition:
+    background-color 160ms ease-out,
+    color 160ms ease-out,
+    transform 120ms ease-out;
+}
+.studios-icon-btn:hover,
+.studios-icon-btn[data-state="open"] {
+  color: var(--studios-ink);
+}
+.studios-icon-btn:active {
+  transform: scale(0.9);
+}
+.studios-icon-btn .studios-mask {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.studios-icon-btn:hover .studios-bell,
+.studios-icon-btn:focus-visible .studios-bell {
+  transform-origin: 50% 8%;
+  animation: studios-bell-ring 560ms ease-out;
+}
+.studios-icon-btn:hover .studios-profile,
+.studios-icon-btn:focus-visible .studios-profile {
+  transform: translateY(-1.5px) scale(1.06);
+}
+@keyframes studios-bell-ring {
+  0% { transform: rotate(0); }
+  20% { transform: rotate(14deg); }
+  40% { transform: rotate(-11deg); }
+  60% { transform: rotate(7deg); }
+  80% { transform: rotate(-3deg); }
+  100% { transform: rotate(0); }
+}
+
+/* Home tile art: micro-animations while the card is hovered or keyboard-focused.
+   Individual translate/rotate/scale properties stack on top of the Figma
+   transforms set inline. Transitions (not keyframes), so the art eases back on
+   mouse-out. The global prefers-reduced-motion rule turns these off. */
+.studios-tile [class*="studios-art-"] {
+  transition:
+    translate 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* Applications: the stacked cards fan out behind the glass card. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-app-back {
+  translate: -3px -4px;
+  rotate: -7deg;
+}
+.studios-tile:is(:hover, :focus-visible) .studios-art-app-mid {
+  translate: -1px -2px;
+  rotate: -3deg;
+}
+.studios-tile:is(:hover, :focus-visible) .studios-art-app-front {
+  translate: 0 -2px;
+}
+/* Solution Journeys: the folder lifts and tips open. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-folder {
+  translate: 0 -4px;
+  rotate: -5deg;
+}
+/* Ai Agents: the back bubble drifts out and the front bubble bobs up. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-chat-bg {
+  translate: 3px 2px;
+}
+.studios-tile:is(:hover, :focus-visible) .studios-art-chat-icon {
+  translate: -1px -3px;
+  rotate: -6deg;
+}
+/* Assistants: the orb swells and its colours swirl inside the mask. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-orb {
+  scale: 1.06;
+  rotate: -10deg;
+}
+.studios-tile .studios-art-orb-fill {
+  transition: filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.studios-tile:is(:hover, :focus-visible) .studios-art-orb-fill {
+  filter: hue-rotate(-35deg) saturate(1.25);
+}
+/* Tiles without a Figma illustration: the card straightens and lifts. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-generic {
+  translate: 0 -3px;
+  rotate: 8deg;
+}
+/* Every tile: the count badge pops. */
+.studios-tile:is(:hover, :focus-visible) .studios-art-badge {
+  scale: 1.1;
+}
+
+/* Home filter row (Figma "studio Landing page" 9331:3018 — drawn collapsed to 10px/1px
+   tall, i.e. it expands downwards). From xl up it sits in the 96px gap between the
+   Welcome row and the tiles, so opening it moves nothing else. Below xl it opens in
+   the page flow. Height animates via grid rows 0fr → 1fr; the bar fades and settles,
+   then the controls arrive left to right. Closing is quicker and all at once.
+   The global prefers-reduced-motion rule turns it off. */
+.studios-filter-reveal {
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-close: cubic-bezier(0.4, 0, 0.2, 1);
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  transition:
+    grid-template-rows 320ms var(--ease-close),
+    margin-top 320ms var(--ease-close);
+}
+.studios-filter-reveal[data-open="true"] {
+  grid-template-rows: 1fr;
+  margin-top: 12px;
+  transition-duration: 500ms;
+  transition-timing-function: var(--ease-out-soft);
+}
+@media (min-width: 80rem) {
+  .studios-filter-reveal {
+    position: absolute;
+    inset: 32px 0 auto; /* directly under the 32px Welcome row */
+    z-index: 5;
+  }
+}
+.studios-filter-clip {
+  min-height: 0;
+  overflow: clip;
+  overflow-clip-margin: 6px; /* keeps the dropdowns' focus rings visible */
+}
+.studios-filter-reveal .studios-filterbar {
+  opacity: 0;
+  translate: 0 -10px;
+  scale: 0.985;
+  transform-origin: top center;
+  transition:
+    opacity 200ms ease-in,
+    translate 260ms ease-in,
+    scale 260ms ease-in;
+}
+.studios-filter-reveal[data-open="true"] .studios-filterbar {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  transition:
+    opacity 360ms var(--ease-out-soft) 60ms,
+    translate 520ms var(--ease-out-soft) 40ms,
+    scale 520ms var(--ease-out-soft) 40ms;
+}
+.studios-filter-reveal .studios-filter-item {
+  opacity: 0;
+  translate: 0 -6px;
+  transition:
+    opacity 150ms ease-in,
+    translate 150ms ease-in;
+}
+.studios-filter-reveal[data-open="true"] .studios-filter-item {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 380ms var(--ease-out-soft) var(--stagger, 120ms),
+    translate 480ms var(--ease-out-soft) var(--stagger, 120ms);
+}
+
+/* Home cards run their titles a step under the shared tile-title style. */
+.studios-tile .studios-type-tile-title {
+  font-size: 20px;
+}
+/* Figma: the tall card's title sits on a 31.2px line (9331:2937). */
+.studios-tile[data-slot="tall"] .studios-type-tile-title {
+  line-height: 31.2px;
+}
+/* WORKSPACES pill label (Graphik Compact Medium 16/20, +1.5) and CUSTOM label (Regular 16/25.6). */
+.studios-ws-label {
+  font-family: var(--studios-display);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.5px;
+}
+.studios-custom-label {
+  font-family: var(--studios-display);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25.6px;
+  letter-spacing: 1.5px;
+}
+
+/* Compact Home (see the fit variant in index.css): description line height scales
+   with screen height; the tall card's title drops back to a single 24px line. */
+@media (min-width: 80rem) and (max-height: 1000px) {
+  .studios-tile .studios-type-tile-desc {
+    line-height: clamp(20px, 2.8vh, 24px);
+  }
+  /* Open filter row: sit a little closer to the Welcome row so it clears the cards. */
+  .studios-filter-reveal[data-open="true"] {
+    margin-top: 6px;
+  }
+  .studios-tile[data-slot="tall"] .studios-type-tile-title {
+    line-height: 24px;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Applications landing (Figma 9465:3450 + Card note 9465:2657)      */
+/* ---------------------------------------------------------------- */
+.studios-apps-title {
+  font-family: var(--font-family-graphik, inherit);
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.studios-apps-caps {
+  font-family: var(--studios-display);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 2.5px;
+}
+/* Figma "Combo" dropdowns at their native 16px. */
+.studios-apps-dd .nuclios-type-body-small-regular {
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--studios-filter-label);
+}
+.studios-apps-dd .nuclios-type-body-default-regular {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--studios-ink);
+}
+/* Filter row sits 8px under the header (Figma top 200 vs header bottom 192). */
+@media (min-width: 80rem) {
+  .studios-filter-reveal.studios-apps-filter {
+    inset: calc(100% + 8px) 0 auto;
+  }
+  .studios-filter-reveal.studios-apps-filter[data-open="true"] {
+    margin-top: 0;
+  }
+}
+
+/* Card / row: rest → hover (glow, white icon tile, darker text, light tags). */
+.studios-app-icon {
+  background: var(--app-tone);
+  color: var(--color-icons-onprimary);
+}
+.studios-app-tag {
+  background: var(--studios-app-tag);
+  color: var(--studios-app-tag-text);
+}
+/* Hover: a soft, eased entrance (glow fades + settles, card lifts, shadow blooms)
+   and a slightly quicker exit. While hovered the glow's colour blobs drift slowly;
+   on leave they pause in place as the glow fades, so nothing snaps back. */
+.studios-app {
+  --hover-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    translate 420ms var(--hover-ease),
+    filter 420ms var(--hover-ease);
+}
+.studios-app .studios-app-glow {
+  opacity: 0;
+  transition: opacity 420ms ease-out;
+}
+.studios-app:is(:hover, :focus-within) {
+  translate: 0 -3px;
+  filter: drop-shadow(var(--studios-app-hover-shadow));
+  transition-duration: 600ms;
+}
+.studios-app:is(:hover, :focus-within) .studios-app-glow {
+  opacity: 1;
+  transition: opacity 700ms var(--hover-ease);
+}
+.studios-app .studios-app-icon,
+.studios-app .studios-app-desc,
+.studios-app .studios-app-title,
+.studios-app .studios-app-tag {
+  transition:
+    background-color 450ms var(--hover-ease),
+    color 450ms var(--hover-ease);
+}
+
+/* Living gradient: each blob wanders on its own loop while the card is hovered. */
+.studios-glow-blob {
+  animation: studios-glow-drift var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate;
+  animation-play-state: paused;
+  will-change: translate, scale;
+}
+.studios-app:is(:hover, :focus-within) .studios-glow-blob {
+  animation-play-state: running;
+}
+@keyframes studios-glow-drift {
+  0% {
+    translate: 0 0;
+    scale: 1;
+  }
+  35% {
+    translate: var(--dx) var(--dy);
+    scale: 1.12;
+  }
+  70% {
+    translate: calc(var(--dx) * -0.6) calc(var(--dy) * 0.7);
+    scale: 0.94;
+  }
+  100% {
+    translate: calc(var(--dy) * 0.5) calc(var(--dx) * -0.5);
+    scale: 1.06;
+  }
+}
+/* List rows: the gradient flows slowly sideways while hovered. */
+.studios-app-row .studios-app-glow {
+  background-image: var(--studios-glow-row);
+  background-size: 220% 100%;
+  animation: studios-row-flow 7s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.studios-app-row:is(:hover, :focus-within) .studios-app-glow {
+  animation-play-state: running;
+}
+@keyframes studios-row-flow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studios-glow-blob,
+  .studios-app-row .studios-app-glow {
+    animation: none;
+  }
+  .studios-app:is(:hover, :focus-within) {
+    translate: none;
+  }
+}
+.studios-app:is(:hover, :focus-within) .studios-app-icon {
+  background: var(--studios-app-icon-hover-bg);
+  color: var(--studios-app-icon-hover);
+}
+.studios-app:is(:hover, :focus-within) .studios-app-desc {
+  color: var(--studios-app-desc-hover);
+}
+.studios-app:is(:hover, :focus-within) .studios-app-title {
+  color: var(--studios-app-desc-hover);
+}
+.studios-app:is(:hover, :focus-within) .studios-app-tag {
+  background: var(--studios-app-tag-hover);
+  color: var(--studios-app-desc-hover);
+}
+
+/* ---------------------------------------------------------------- */
+/* All Features (Figma 40000002:12689 — rest 12694, hover 12766)     */
+/* ---------------------------------------------------------------- */
+.studios-feat-heading {
+  font-family: var(--studios-display);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+}
+/* Hover card: lifts out of the card on hover / keyboard focus. A short delay on the
+   way in stops it flashing while the pointer sweeps across a row; the way out is quick. */
+.studios-feature-pop {
+  --pop-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  visibility: hidden;
+  scale: 0.94;
+  translate: 0 6px;
+  pointer-events: none;
+  filter: drop-shadow(var(--studios-feat-pop-shadow));
+  transition:
+    opacity 160ms ease-in,
+    scale 200ms ease-in,
+    translate 200ms ease-in,
+    visibility 0s linear 200ms;
+}
+.studios-feature:is(:hover, :focus-within) .studios-feature-pop {
+  opacity: 1;
+  visibility: visible;
+  scale: 1;
+  translate: 0 0;
+  pointer-events: auto;
+  transition:
+    opacity 260ms var(--pop-ease) 90ms,
+    scale 380ms var(--pop-ease) 90ms,
+    translate 380ms var(--pop-ease) 90ms,
+    visibility 0s linear 90ms;
+}
+.studios-feature:is(:hover, :focus-within) {
+  z-index: 20;
+}
+.studios-feature-rest:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-border-primary-focused);
+}
+/* Hover-card actions (Figma Button 9872:41320) */
+.studios-feat-btn {
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--studios-feat-btn);
+  cursor: pointer;
+  transition: background-color 160ms ease-out;
+}
+.studios-feat-btn:hover {
+  background: var(--studios-feat-btn-hover);
+}
+.studios-feat-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-primary-focused);
+}
+.studios-feat-btn-ai {
+  height: 36px;
+  padding: 0 20px;
+  line-height: 20px;
+  background: var(--studios-feat-btn-ai);
+}
+.studios-feat-btn-ai:hover {
+  background: var(--studios-feat-btn-ai-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .studios-feature-pop,
+  .studios-feature:is(:hover, :focus-within) .studios-feature-pop {
+    scale: 1;
+    translate: 0 0;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Explore Applications (Features page)                              */
+/* ---------------------------------------------------------------- */
+.studios-explore-title {
+  font-family: var(--studios-display);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.2px;
+}
+.studios-explore-studio {
+  font-family: var(--studios-display);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.3px;
+}
+.studios-explore-studio-icon {
+  background: var(--studios-explore-studio-tile);
+  color: var(--studios-explore-studio-icon);
+}
+.studios-explore-tile {
+  --tile-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Rest: no card. Hover: the card fades in behind. Pressed/selected: card + coloured stroke. */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition:
+    background-color 300ms var(--tile-ease),
+    box-shadow 300ms var(--tile-ease),
+    border-color 300ms var(--tile-ease),
+    translate 300ms var(--tile-ease);
+}
+.studios-explore-tile:hover,
+.studios-explore-tile:focus-visible {
+  background: var(--studios-explore-tile-hover);
+  border-color: var(--studios-explore-tile-border);
+  box-shadow: var(--studios-explore-tile-shadow-hover);
+  translate: 0 -2px;
+  outline: none;
+}
+.studios-explore-tile.is-selected,
+.studios-explore-tile:active {
+  background: var(--studios-explore-tile-hover);
+  border-color: var(--studios-explore-tile-ring);
+  box-shadow:
+    0 0 0 1px var(--studios-explore-tile-ring),
+    var(--studios-explore-tile-shadow-hover);
+}
+.studios-explore-tile:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-border-primary-focused),
+    var(--studios-explore-tile-shadow-hover);
+}
+.studios-explore-panel {
+  background: var(--studios-explore-panel);
+  border: 1px solid var(--studios-explore-panel-border);
+}
+.studios-explore-panel-icon {
+  background: var(--color-background-neutral);
+  box-shadow: 0 4px 14px var(--color-transparency-primary-primary-600-10);
+}
+.studios-explore-panel-title {
+  font-family: var(--studios-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+}
+.studios-explore-panel-body {
+  animation: studios-explore-swap 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes studios-explore-swap {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+.studios-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid var(--studios-explore-btn);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--studios-explore-btn-text);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease-out,
+    border-color 180ms ease-out;
+}
+.studios-explore-btn:hover {
+  background: var(--color-surface-70);
+}
+.studios-explore-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-primary-focused);
+}
+.studios-explore-btn-ai {
+  border-color: transparent;
+  background: var(--studios-explore-btn-ai);
+}
+.studios-explore-btn-ai:hover {
+  background: var(--studios-explore-btn-ai-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .studios-explore-tile:hover,
+  .studios-explore-tile:focus-visible {
+    translate: none;
+  }
+}
+/* Illustration (cut from the mockup) feathers into the panel instead of showing its box. */
+.studios-explore-illustration {
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 52%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 52%, #000 62%, transparent 100%);
+}
+
+/* Feature details panel — Opt 2 "Studio Theme" (Figma 73333:191) */
+.studios-detail-panel {
+  background: var(--studios-detail-panel);
+  box-shadow: var(--studios-detail-panel-shadow);
+}
+.studios-detail-title {
+  font-family: var(--studios-display);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.5px;
+}
+.studios-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--studios-detail-btn-border);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: var(--studios-detail-btn-text);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease-out,
+    border-color 180ms ease-out;
+}
+.studios-detail-btn:hover {
+  background: var(--studios-detail-btn-hover);
+  border-color: var(--studios-explore-tile-ring);
+}
+.studios-detail-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-primary-focused);
+}
+.studios-detail-btn-sm {
+  height: 28px;
+  padding: 0 16px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+
+/* Features: studio accordion ("View More" → "View Less", Figma 40000015:13684). */
+.studios-accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 340ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 220ms ease-in;
+}
+.studios-accordion[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+}
+.studios-accordion-clip {
+  min-height: 0;
+  overflow: clip;
+  overflow-clip-margin: 12px; /* room for the tiles' hover shadow */
+}
+.studios-scroll {
+  scrollbar-width: thin;
+}

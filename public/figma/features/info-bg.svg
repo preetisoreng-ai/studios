@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="68.2665" height="67.7282" viewBox="0 0 68.2665 67.7282" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Bg">
+<path id="Info Square" d="M40.6762 19.2583H27.4223C22.24 19.2583 18.7545 22.8967 18.7545 28.3083V40.7994C18.7545 46.1958 22.24 49.8326 27.4223 49.8326H40.6762C45.8586 49.8326 49.3288 46.1958 49.3288 40.7994V28.3083C49.3288 22.8967 45.8586 19.2583 40.6762 19.2583V19.2583Z" fill="url(#paint0_linear_0_806)"/>
+<g id="Rectangle 1034" filter="url(#filter0_f_0_806)">
+<rect width="19.7282" height="20.2665" rx="9.86408" transform="matrix(6.31614e-07 -1 1 -6.049e-07 24 43.7282)" fill="#D4FF37" fill-opacity="0.5"/>
+</g>
+<path id="Union" d="M34.0264 32.2241C34.7754 32.2242 35.3711 32.8345 35.3711 33.5698L35.3711 40.3266C35.371 41.0603 34.7753 41.6567 34.0264 41.6567C33.2927 41.6567 32.6964 41.0603 32.6963 40.3266L32.6963 33.5698C32.6963 32.8345 33.2926 32.2241 34.0264 32.2241ZM34.0567 27.3774C34.7904 27.3774 35.3867 27.9741 35.3867 28.7231C35.3865 29.4551 34.7905 30.0521 34.0264 30.0522C33.308 30.0522 32.7122 29.4552 32.7119 28.7231C32.7119 27.9741 33.3076 27.3775 34.0567 27.3774Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_f_0_806" x="-4.76837e-07" y="-4.76837e-07" width="68.2665" height="67.7282" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="12" result="effect1_foregroundBlur_0_806"/>
+</filter>
+<linearGradient id="paint0_linear_0_806" x1="34.0416" y1="19.2583" x2="34.0416" y2="49.8326" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC94FF"/>
+<stop offset="1" stop-color="#9F66FF"/>
+</linearGradient>
+</defs>
+</svg>

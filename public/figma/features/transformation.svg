@@ -1,0 +1,28 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40.0001" height="26.0002" viewBox="0 0 40.0001 26.0002" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Icons">
+<path id="Ellipse 5" d="M40.0001 13.0001C40.0001 20.1798 34.1814 26.0001 27.0037 26.0001C19.826 26.0001 14.0073 20.1798 14.0073 13.0001C14.0073 5.82044 19.826 0.000142698 27.0037 0.000142698C34.1814 0.000142698 40.0001 5.82044 40.0001 13.0001Z" fill="url(#paint0_linear_0_106)"/>
+<foreignObject x="-23.9999" y="-23.9998" width="73.9928" height="74"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(12px);clip-path:url(#bgblur_0_0_106_clip_path);height:100%;width:100%"></div></foreignObject><path id="Ellipse 4" data-figma-bg-blur-radius="24" d="M25.9928 13.0002C25.9928 20.1799 20.1742 26.0002 12.9964 26.0002C5.81874 26.0002 5.52777e-05 20.1799 5.52777e-05 13.0002C5.52777e-05 5.82046 5.81874 0.000160971 12.9964 0.000160971C20.1742 0.000160971 25.9928 5.82046 25.9928 13.0002Z" fill="#FF749F" fill-opacity="0.35"/>
+<foreignObject x="-12.5966" y="-12.5965" width="51.186" height="51.1933"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6.3px);clip-path:url(#bgblur_1_0_106_clip_path);height:100%;width:100%"></div></foreignObject><g id="Ellipse 4 (Stroke)" data-figma-bg-blur-radius="12.5966">
+<use xlink:href="#stroke0_0_106" fill="url(#paint1_linear_0_106)"/>
+<use xlink:href="#stroke0_0_106" fill="url(#paint2_radial_0_106)"/>
+</g>
+</g>
+<defs>
+<clipPath id="bgblur_0_0_106_clip_path" transform="translate(23.9999 23.9998)"><path d="M25.9928 13.0002C25.9928 20.1799 20.1742 26.0002 12.9964 26.0002C5.81874 26.0002 5.52777e-05 20.1799 5.52777e-05 13.0002C5.52777e-05 5.82046 5.81874 0.000160971 12.9964 0.000160971C20.1742 0.000160971 25.9928 5.82046 25.9928 13.0002Z"/>
+</clipPath><clipPath id="bgblur_1_0_106_clip_path" transform="translate(12.5966 12.5965)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.9964 25.9279C20.1343 25.9279 25.9206 20.14 25.9206 13.0002C25.9206 5.86035 20.1343 0.0723832 12.9964 0.0723832C5.85861 0.0723832 0.0722574 5.86035 0.0722574 13.0002C0.0722574 20.14 5.85861 25.9279 12.9964 25.9279ZM12.9964 26.0002C20.1742 26.0002 25.9928 20.1799 25.9928 13.0002C25.9928 5.82046 20.1742 0.000160971 12.9964 0.000160971C5.81874 0.000160971 5.52777e-05 5.82046 5.52777e-05 13.0002C5.52777e-05 20.1799 5.81874 26.0002 12.9964 26.0002Z"/>
+</clipPath><linearGradient id="paint0_linear_0_106" x1="35.1923" y1="8.34324" x2="13.7516" y2="20.5957" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF759F"/>
+<stop offset="1" stop-color="#FF196E"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_106" x1="3.74071" y1="-0.92841" x2="28.108" y2="13.2948" gradientUnits="userSpaceOnUse">
+<stop offset="0.188941" stop-color="#E7F0FF" stop-opacity="0.523483"/>
+<stop offset="0.526042" stop-color="#88A4FF"/>
+<stop offset="1" stop-color="#B4D2FF" stop-opacity="0.1"/>
+</linearGradient>
+<radialGradient id="paint2_radial_0_106" cx="0" cy="0" r="1" gradientTransform="matrix(12.8525 -15.8631 15.8587 33.4525 3.88458 25.149)" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<path id="stroke0_0_106" d="M12.9964 25.9279C20.1343 25.9279 25.9206 20.14 25.9206 13.0002C25.9206 5.86035 20.1343 0.0723832 12.9964 0.0723832C5.85861 0.0723832 0.0722574 5.86035 0.0722574 13.0002C0.0722574 20.14 5.85861 25.9279 12.9964 25.9279ZM12.9964 26.0002C20.1742 26.0002 25.9928 20.1799 25.9928 13.0002C25.9928 5.82046 20.1742 0.000160971 12.9964 0.000160971C5.81874 0.000160971 5.52777e-05 5.82046 5.52777e-05 13.0002C5.52777e-05 20.1799 5.81874 26.0002 12.9964 26.0002Z" fill-rule="evenodd" clip-rule="evenodd"/>
+</defs>
+</svg>
