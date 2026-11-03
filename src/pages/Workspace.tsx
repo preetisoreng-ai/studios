@@ -1,8 +1,17 @@
 import * as React from "react";
-import { ArrowLeft, Copy, EllipsisVertical, Pencil, Plus, RotateCcw, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Copy,
+  EllipsisVertical,
+  Pencil,
+  Plus,
+  RotateCcw,
+  Search,
+} from "lucide-react";
 import {
   Button,
-  Checkbox,
+  Chip,
   DataTable,
   Dropdown,
   Input,
@@ -16,23 +25,18 @@ import {
   Tooltip,
   type Column,
 } from "@nuclios";
-import { cn } from "@/lib/utils";
-import { ARTIFACTS, FUNCTIONS, INDUSTRIES, WORKSPACES, type Project } from "@/data";
+import {
+  EXEC_ENVS,
+  FUNCTIONS,
+  INDUSTRIES,
+  WORKSPACE_ARTIFACTS,
+  WORKSPACES,
+  type Project,
+} from "@/data";
+import { MembersEditor, type Member } from "@/components/studios/People";
 
 const iconBtn =
   "inline-flex size-8 items-center justify-center rounded-(--radius-component-set-1) text-(--color-icons-neutral-subtle) hover:bg-(--color-background-neutral-hover) hover:text-(--color-icons-neutral) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-border-primary-focused) cursor-pointer";
-
-const MEMBERS = [
-  "Samuel",
-  "Anish",
-  "Isha",
-  "Disha",
-  "Deepak",
-  "Florence",
-  "John",
-  "Teresa",
-  "Keerthi",
-];
 
 export function Workspace({
   projects,
@@ -52,6 +56,8 @@ export function Workspace({
   const [fn, setFn] = React.useState("all");
   const [query, setQuery] = React.useState("");
   const [addOpen, setAddOpen] = React.useState(false);
+  const [editing, setEditing] = React.useState<Project | null>(null);
+  const [tab, setTab] = React.useState("projects");
   const [toDelete, setToDelete] = React.useState<Project | null>(null);
 
   const rows = projects.filter(
@@ -78,7 +84,12 @@ export function Workspace({
       render: (p) => (
         <span className="flex justify-end gap-2" onClick={(e) => e.stopPropagation()}>
           <Tooltip content="Edit">
-            <button type="button" aria-label={`Edit ${p.name}`} className={iconBtn}>
+            <button
+              type="button"
+              aria-label={`Edit ${p.name}`}
+              className={iconBtn}
+              onClick={() => setEditing(p)}
+            >
               <Pencil className="size-4" />
             </button>
           </Tooltip>
@@ -163,28 +174,32 @@ export function Workspace({
             value={workspace}
             onValueChange={setWorkspace}
           />
-          <Dropdown
-            id="ws-industry"
-            label="Industry"
-            header="inline"
-            variant="filled"
-            size="m"
-            className="w-auto"
-            options={opt(INDUSTRIES)}
-            value={industry}
-            onValueChange={setIndustry}
-          />
-          <Dropdown
-            id="ws-function"
-            label="Function"
-            header="inline"
-            variant="filled"
-            size="m"
-            className="w-auto"
-            options={opt(FUNCTIONS)}
-            value={fn}
-            onValueChange={setFn}
-          />
+          {tab !== "exec" && (
+            <>
+              <Dropdown
+                id="ws-industry"
+                label="Industry"
+                header="inline"
+                variant="filled"
+                size="m"
+                className="w-auto"
+                options={opt(INDUSTRIES)}
+                value={industry}
+                onValueChange={setIndustry}
+              />
+              <Dropdown
+                id="ws-function"
+                label="Function"
+                header="inline"
+                variant="filled"
+                size="m"
+                className="w-auto"
+                options={opt(FUNCTIONS)}
+                value={fn}
+                onValueChange={setFn}
+              />
+            </>
+          )}
           <Tooltip content="Reset filters">
             <button
               type="button"
@@ -209,12 +224,12 @@ export function Workspace({
       </div>
 
       <section className="mt-4 rounded-(--radius-container-set-2) border border-(--color-border-subtle) bg-(--color-background-neutral)">
-        <Tabs defaultValue="projects">
+        <Tabs value={tab} onValueChange={setTab}>
           <div className="flex flex-wrap items-center justify-between gap-3 px-3 pt-4">
             <TabsList
               type="ghost"
               aria-label="Workspace content"
-              className="gap-0 rounded-(--radius-component-set-1) border border-(--color-border-neutral) p-0"
+              className="w-fit flex-none gap-0 overflow-hidden rounded-(--radius-component-set-1) border border-(--color-border-neutral) p-0"
             >
               <TabsTrigger value="projects" className="h-8 rounded-none px-3">
                 Projects
@@ -237,8 +252,8 @@ export function Workspace({
               <Input
                 id="ws-search"
                 size="m"
-                aria-label="Search projects"
-                placeholder="Search anything inside projects"
+                aria-label={`Search ${tab === "exec" ? "environments" : tab}`}
+                placeholder={`Search anything inside ${tab === "exec" ? "environments" : tab}`}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="pl-9"
@@ -261,32 +276,159 @@ export function Workspace({
           <TabsContent value="artifacts" className="mt-3">
             <DataTable
               columns={[
-                { key: "name", header: "Name", sortable: true },
-                { key: "industry", header: "Industry", sortable: true },
-                { key: "fn", header: "Function", sortable: true },
-                { key: "edited", header: "Last edited" },
+                { key: "name", header: "Artifact Name", sortable: true },
+                { key: "project", header: "Project Location" },
+                { key: "type", header: "Type", sortable: true },
+                {
+                  key: "tags",
+                  header: "Tags",
+                  render: (a) => (
+                    <span className="flex flex-wrap gap-(--spacing-xs)">
+                      {a.tags.map((t, i) => (
+                        <Chip key={t} size="m" state={i === 0 ? "error" : "selected"}>
+                          {t}
+                        </Chip>
+                      ))}
+                    </span>
+                  ),
+                },
+                { key: "collaborators", header: "Collaborators", sortable: true },
+                {
+                  key: "id",
+                  header: "",
+                  align: "right",
+                  render: (a) => (
+                    <span className="flex justify-end gap-2">
+                      <Tooltip content="Edit">
+                        <button
+                          type="button"
+                          aria-label={`Edit ${a.name}`}
+                          className={iconBtn}
+                          onClick={() => notify(`Edit ${a.name}`, "Opening the artifact overview.")}
+                        >
+                          <Pencil className="size-4" />
+                        </button>
+                      </Tooltip>
+                      <Tooltip content="Clone">
+                        <button
+                          type="button"
+                          aria-label={`Clone ${a.name}`}
+                          className={iconBtn}
+                          onClick={() =>
+                            notify("Artifact cloned", `${a.name} (copy) was added to ${a.project}.`)
+                          }
+                        >
+                          <Copy className="size-4" />
+                        </button>
+                      </Tooltip>
+                      <Menu
+                        align="end"
+                        trigger={
+                          <button
+                            type="button"
+                            aria-label={`More actions for ${a.name}`}
+                            className={iconBtn}
+                          >
+                            <EllipsisVertical className="size-4" />
+                          </button>
+                        }
+                        items={["Share", "Move", "Promote", "Export"].map((label) => ({
+                          label,
+                          onSelect: () =>
+                            notify(label, `${a.name}: ${label.toLowerCase()} started.`),
+                        }))}
+                      />
+                    </span>
+                  ),
+                },
               ]}
-              rows={ARTIFACTS.filter((a) => a.workspace === workspace)}
+              rows={WORKSPACE_ARTIFACTS.filter(
+                (a) =>
+                  a.workspace === workspace &&
+                  `${a.name} ${a.project} ${a.type}`.toLowerCase().includes(query.toLowerCase())
+              )}
               rowKey={(a) => a.id}
               emptyMessage="No artifacts in this workspace yet."
             />
           </TabsContent>
-          <TabsContent
-            value="exec"
-            className="mt-3 px-6 pb-8 nuclios-type-body-default-regular text-(--color-text-neutral-muted)"
-          >
-            Execution environments for {workspace} are managed by your workspace admin.
+          <TabsContent value="exec" className="mt-3">
+            <DataTable
+              columns={[
+                { key: "name", header: "Environment Name", sortable: true },
+                { key: "python", header: "Python version" },
+                {
+                  key: "status",
+                  header: "Status",
+                  sortable: true,
+                  render: (e) => (
+                    <span className="flex items-center gap-(--spacing-xs)">
+                      <CheckCircle2 className="size-4 text-(--color-icons-positive)" aria-hidden />
+                      {e.status}
+                    </span>
+                  ),
+                },
+                {
+                  key: "id",
+                  header: "",
+                  align: "right",
+                  render: (e) => (
+                    <span className="flex justify-end gap-2">
+                      <Tooltip content="Edit">
+                        <button
+                          type="button"
+                          aria-label={`Edit ${e.name}`}
+                          className={iconBtn}
+                          onClick={() =>
+                            notify(`Edit ${e.name}`, "Environment settings open in a new tab.")
+                          }
+                        >
+                          <Pencil className="size-4" />
+                        </button>
+                      </Tooltip>
+                      <Tooltip content="Clone">
+                        <button
+                          type="button"
+                          aria-label={`Clone ${e.name}`}
+                          className={iconBtn}
+                          onClick={() =>
+                            notify("Environment cloned", `${e.name} (copy) is starting.`)
+                          }
+                        >
+                          <Copy className="size-4" />
+                        </button>
+                      </Tooltip>
+                    </span>
+                  ),
+                },
+              ]}
+              rows={EXEC_ENVS.filter((e) => e.name.toLowerCase().includes(query.toLowerCase()))}
+              rowKey={(e) => e.id}
+            />
           </TabsContent>
         </Tabs>
       </section>
 
       <AddProjectModal
-        open={addOpen}
-        onOpenChange={setAddOpen}
+        open={addOpen || !!editing}
+        onOpenChange={(o) => {
+          if (!o) {
+            setAddOpen(false);
+            setEditing(null);
+          }
+        }}
         workspace={workspace}
-        onCreate={(p) => {
-          onProjectsChange([...projects, p]);
-          notify("Project created", `${p.name} was added to ${workspace}.`);
+        editing={editing}
+        siblings={rows.map((p) => p.name)}
+        onSave={(p, openAfter) => {
+          const exists = projects.some((x) => x.id === p.id);
+          onProjectsChange(
+            exists ? projects.map((x) => (x.id === p.id ? p : x)) : [...projects, p]
+          );
+          notify(
+            exists ? "Project updated" : "Project created",
+            `${p.name} was saved in ${workspace}.`
+          );
+          if (openAfter) onOpenProject(p.id);
         }}
       />
 
@@ -323,38 +465,76 @@ export function Workspace({
   );
 }
 
-/* "Add Project" — Figma 1974:10384: Details → Members */
+/* "Add Project" — Figma 1974:10384 (Details) → 6114:28198 (Members); edit = 6114:29408 */
 function AddProjectModal({
   open,
   onOpenChange,
   workspace,
-  onCreate,
+  editing,
+  siblings,
+  onSave,
 }: {
   open: boolean;
   onOpenChange: (o: boolean) => void;
   workspace: string;
-  onCreate: (p: Project) => void;
+  editing: Project | null;
+  siblings: string[];
+  onSave: (p: Project, openAfter: boolean) => void;
 }) {
   const [step, setStep] = React.useState<"details" | "members">("details");
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
-  const [members, setMembers] = React.useState<string[]>([]);
+  const [members, setMembers] = React.useState<Member[]>([]);
+  const [inherit, setInherit] = React.useState("");
   const [touched, setTouched] = React.useState(false);
 
   React.useEffect(() => {
-    if (open) {
-      setStep("details");
-      setName("");
-      setDesc("");
-      setMembers([]);
-      setTouched(false);
-    }
-  }, [open]);
+    if (!open) return;
+    setStep("details");
+    setName(editing?.name ?? "");
+    setDesc(editing?.description ?? "");
+    setMembers(
+      editing
+        ? editing.collaborators
+            .split(",")
+            .map((c) => c.trim())
+            .filter(Boolean)
+            .map((c, i) => ({
+              email: `${c.toLowerCase()}@company.com`,
+              role: i === 0 ? "Admin" : "Contributor",
+            }))
+        : []
+    );
+    setInherit("");
+    setTouched(false);
+  }, [open, editing]);
 
   const nameError = touched && !name.trim() ? "Enter a project name" : undefined;
+  const save = (openAfter: boolean) => {
+    const people = members
+      .map((m) => m.email.split("@")[0])
+      .map((n) => n[0].toUpperCase() + n.slice(1));
+    onSave(
+      {
+        id: editing?.id ?? `p${Date.now()}`,
+        name: name.trim(),
+        description: desc.trim() || "—",
+        artifacts: editing?.artifacts ?? "Nil",
+        collaborators: people.length ? people.join(", ") : "Amy",
+        workspace,
+      },
+      openAfter
+    );
+    onOpenChange(false);
+  };
 
   return (
-    <Modal open={open} onOpenChange={onOpenChange} size="m" title="Add Project">
+    <Modal
+      open={open}
+      onOpenChange={onOpenChange}
+      size="m"
+      title={editing ? "Edit Project" : "Add Project"}
+    >
       <Tabs
         value={step}
         onValueChange={(v) =>
@@ -362,7 +542,7 @@ function AddProjectModal({
         }
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <TabsList tone="brand" aria-label="Add project steps" className="border-b-0">
+          <TabsList tone="brand" aria-label="Project steps" className="w-fit">
             <TabsTrigger value="details">Details</TabsTrigger>
             <TabsTrigger value="members">Members</TabsTrigger>
           </TabsList>
@@ -370,7 +550,7 @@ function AddProjectModal({
             Workspace : <span className="font-medium text-(--color-text-neutral)">{workspace}</span>
           </p>
         </div>
-        <TabsContent value="details" className="flex flex-col gap-5">
+        <TabsContent value="details" className="flex flex-col gap-(--spacing-xl) pt-(--spacing-xl)">
           <Input
             id="proj-name"
             label="Project Name"
@@ -387,7 +567,7 @@ function AddProjectModal({
             placeholder="Describe the project"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="min-h-36"
+            className="min-h-32"
           />
           <div>
             <Button
@@ -398,44 +578,42 @@ function AddProjectModal({
             </Button>
           </div>
         </TabsContent>
-        <TabsContent value="members" className="flex flex-col gap-5">
-          <p className="nuclios-type-body-default-regular text-(--color-text-neutral-muted)">
-            Choose who can collaborate on {name || "this project"}.
-          </p>
-          <div className="grid grid-cols-3 gap-4 max-sm:grid-cols-2">
-            {MEMBERS.map((m) => (
-              <Checkbox
-                key={m}
-                id={`m-${m}`}
-                size="m"
-                label={m}
-                checked={members.includes(m)}
-                onCheckedChange={(v) =>
-                  setMembers((xs) => (v === true ? [...xs, m] : xs.filter((x) => x !== m)))
-                }
+        <TabsContent value="members" className="flex flex-col gap-(--spacing-xl) pt-(--spacing-xl)">
+          <MembersEditor
+            idPrefix="proj"
+            members={members}
+            onChange={setMembers}
+            aside={
+              <Dropdown
+                id="proj-inherit"
+                label="Inherit roles from projects"
+                header="inline"
+                size="l"
+                placeholder="Select"
+                className="w-auto"
+                options={siblings
+                  .filter((n) => n !== editing?.name)
+                  .map((n) => ({ value: n, label: n }))}
+                value={inherit}
+                onValueChange={(v) => {
+                  setInherit(v);
+                  const extra: Member[] = ["samuel", "disha", "deepak"]
+                    .map((n) => ({
+                      email: `${n}@company.com`,
+                      role: "Contributor" as const,
+                    }))
+                    .filter((m) => !members.some((x) => x.email === m.email));
+                  setMembers([...members, ...extra]);
+                }}
               />
-            ))}
-          </div>
-          <div className="flex gap-3">
-            <Button variant="border" size="large" onClick={() => setStep("details")}>
-              BACK
+            }
+          />
+          <div className="flex gap-(--spacing-l)">
+            <Button size="large" onClick={() => save(false)}>
+              SAVE
             </Button>
-            <Button
-              size="large"
-              className={cn(members.length === 0 && "")}
-              onClick={() => {
-                onCreate({
-                  id: `p${Date.now()}`,
-                  name: name.trim(),
-                  description: desc.trim() || "—",
-                  artifacts: "Nil",
-                  collaborators: members.length ? members.join(", ") : "Amy",
-                  workspace,
-                });
-                onOpenChange(false);
-              }}
-            >
-              CREATE PROJECT
+            <Button variant="border" size="large" onClick={() => save(true)}>
+              Save &amp; Open
             </Button>
           </div>
         </TabsContent>

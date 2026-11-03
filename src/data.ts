@@ -1030,7 +1030,103 @@ export interface AdminUser {
   email: string;
   created: string;
   org: "Admin" | "Contributor" | "Reader";
+  /** Memberships shown in the User Details panel (Figma 2014:11797). */
+  workspaces?: Membership[];
+  projects?: Membership[];
 }
+
+export type Role = "Admin" | "Contributor" | "Reader";
+export const ROLES: Role[] = ["Admin", "Contributor", "Reader"];
+export interface Membership {
+  name: string;
+  role: Role;
+}
+
+/** Admin › Workspaces table (Figma 2014:14090). */
+export interface AdminWorkspace {
+  id: string;
+  name: string;
+  description: string;
+  created: string;
+  projects: number;
+  members: { email: string; role: Role }[];
+}
+export const ADMIN_WORKSPACES: AdminWorkspace[] = [
+  ["Marketing", 12, 56],
+  ["Supply Chain", 22, 67],
+  ["Finance", 23, 78],
+  ["Production", 24, 89],
+  ["Misc", 25, 90],
+].map(([name, projects, n], i) => ({
+  id: `w${i + 1}`,
+  name: name as string,
+  description: "",
+  created: "2025-04-25 10:42:24",
+  projects: projects as number,
+  members: Array.from({ length: n as number }, (_, k) => ({
+    email: `member${k + 1}@company.com`,
+    role: (k === 0 ? "Admin" : k < 4 ? "Contributor" : "Reader") as Role,
+  })),
+}));
+
+/** Directory used by the people pickers. */
+export const PEOPLE = [
+  "disha@company.com",
+  "samuel@company.com",
+  "anish@company.com",
+  "isha@company.com",
+  "deepak@company.com",
+  "florence@company.com",
+  "john@company.com",
+  "teresa@company.com",
+  "keerthi@company.com",
+];
+
+/** Manage Workspace › Artifacts tab (Figma 1954:12214). */
+export const WORKSPACE_ARTIFACTS = [
+  {
+    id: "wa1",
+    name: "MMM Blueprint",
+    project: "UK Market Mix Model",
+    type: "Blueprint",
+    tags: ["CPG", "Merchandising"],
+    collaborators: "Samuel, Anish, Isha",
+    workspace: "Sales & Marketing",
+  },
+  {
+    id: "wa2",
+    name: "MMM Model",
+    project: "UK Promofit",
+    type: "Data Model",
+    tags: ["CPG", "Merchandising"],
+    collaborators: "Samuel, Disha, Deepak, Isha",
+    workspace: "Sales & Marketing",
+  },
+  {
+    id: "wa3",
+    name: "Demand Sensing App",
+    project: "Asia Demand Forecasting",
+    type: "Application",
+    tags: ["Retail", "Supply Chain"],
+    collaborators: "Florence, John",
+    workspace: "Operations",
+  },
+  {
+    id: "wa4",
+    name: "RGM Bot",
+    project: "Revenue Growth Management",
+    type: "AI Assistant",
+    tags: ["CPG", "Revenue"],
+    collaborators: "Teresa, Keerthi",
+    workspace: "Finance",
+  },
+];
+
+/** Manage Workspace › Exec. Environment tab (Figma 1965:10005). */
+export const EXEC_ENVS = [
+  { id: "e1", name: "Solutioning 1", python: "3.10", status: "Running" },
+  { id: "e2", name: "Solutioning 2", python: "3.10", status: "Running" },
+];
 
 export const USERS: AdminUser[] = [
   {

@@ -69,7 +69,11 @@ export default function App() {
   }, [toast]);
 
   // Create-artifact flow (Figma 10161:5977): Create → popup → Save & Open → overview page.
-  const [creating, setCreating] = React.useState<{ featureId: string; title: string } | null>(null);
+  const [creating, setCreating] = React.useState<{
+    featureId: string;
+    title: string;
+    defaults?: { workspace?: string; project?: string };
+  } | null>(null);
   const [artifact, setArtifact] = React.useState<NewArtifact | null>(null);
   const [artifactKey, setArtifactKey] = React.useState(0);
   const unsaved = React.useRef(false);
@@ -192,6 +196,14 @@ export default function App() {
                 project={p}
                 onHome={() => go({ page: "home" })}
                 onWorkspace={() => go({ page: "workspace" })}
+                onCreateArtifact={(f) =>
+                  setCreating({
+                    featureId: f.id,
+                    title: f.label,
+                    defaults: { workspace: p.workspace, project: p.name },
+                  })
+                }
+                onOpenFeature={(featureId) => go({ page: "landing", featureId })}
                 notify={notify}
               />
             ) : null;
@@ -214,6 +226,7 @@ export default function App() {
           onOpenChange={(o) => !o && setCreating(null)}
           featureId={creating?.featureId ?? ""}
           featureTitle={creating?.title ?? ""}
+          defaults={creating?.defaults}
           onSave={(a) => {
             setCreating(null);
             setArtifact(a);

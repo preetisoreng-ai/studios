@@ -36,7 +36,10 @@ function ApplicationsArt({ count, badge = true }: { count: number; badge?: boole
   return (
     <div className="relative h-[97px] w-[104px] shrink-0" aria-hidden>
       <div
-        className={cn(abs, "studios-art-app-back flex h-[73.324px] w-[82.093px] items-center justify-center")}
+        className={cn(
+          abs,
+          "studios-art-app-back flex h-[73.324px] w-[82.093px] items-center justify-center"
+        )}
         style={{ left: 1.5, top: 0 }}
       >
         <div
@@ -49,7 +52,10 @@ function ApplicationsArt({ count, badge = true }: { count: number; badge?: boole
         />
       </div>
       <div
-        className={cn(abs, "studios-art-app-mid flex h-[65.979px] w-[79.3px] items-center justify-center")}
+        className={cn(
+          abs,
+          "studios-art-app-mid flex h-[65.979px] w-[79.3px] items-center justify-center"
+        )}
         style={{ left: 0, top: 10.96 }}
       >
         <div
@@ -62,7 +68,10 @@ function ApplicationsArt({ count, badge = true }: { count: number; badge?: boole
         />
       </div>
       <div
-        className={cn(abs, "studios-art-app-front h-[51.345px] w-[82.242px] rounded-lg backdrop-blur-[9.692px]")}
+        className={cn(
+          abs,
+          "studios-art-app-front h-[51.345px] w-[82.242px] rounded-lg backdrop-blur-[9.692px]"
+        )}
         style={{
           left: 2.06,
           top: 36.79,
@@ -71,11 +80,17 @@ function ApplicationsArt({ count, badge = true }: { count: number; badge?: boole
         }}
       />
       <div
-        className={cn(abs, "studios-art-app-front h-[2.914px] w-[20.766px] rounded-[1.869px] blur-[0.312px]")}
+        className={cn(
+          abs,
+          "studios-art-app-front h-[2.914px] w-[20.766px] rounded-[1.869px] blur-[0.312px]"
+        )}
         style={{ left: 14.23, top: 49.7, background: "var(--studios-art-white)" }}
       />
       <div
-        className={cn(abs, "studios-art-app-front h-[5.099px] w-[20.766px] rounded-[1.869px] blur-[0.312px]")}
+        className={cn(
+          abs,
+          "studios-art-app-front h-[5.099px] w-[20.766px] rounded-[1.869px] blur-[0.312px]"
+        )}
         style={{ left: 14.23, top: 54.8, background: "var(--studios-art-white)" }}
       />
       {badge && (
@@ -91,7 +106,10 @@ function ApplicationsArt({ count, badge = true }: { count: number; badge?: boole
 function SolutionArt({ count }: { count: number }) {
   return (
     <div className="relative h-[74px] w-[98px] shrink-0" aria-hidden>
-      <div className={cn(abs, "studios-art-folder h-[61.239px] w-[82.88px]")} style={{ left: 0, top: 0 }}>
+      <div
+        className={cn(abs, "studios-art-folder h-[61.239px] w-[82.88px]")}
+        style={{ left: 0, top: 0 }}
+      >
         <div className="absolute" style={{ inset: "-8.85% -14.76% -32.03% -14.86%" }}>
           <img alt="" src="figma/home/solution-folder.svg" className="block size-full max-w-none" />
         </div>
@@ -136,8 +154,7 @@ function AssistantArt({ count }: { count: number }) {
           style={{
             left: -7.05,
             top: -4.82,
-            WebkitMask:
-              `${maskUrl("figma/assistants-mask.svg")} 7.051px 4.824px / 68.947px 67.156px no-repeat`,
+            WebkitMask: `${maskUrl("figma/assistants-mask.svg")} 7.051px 4.824px / 68.947px 67.156px no-repeat`,
             mask: `${maskUrl("figma/assistants-mask.svg")} 7.051px 4.824px / 68.947px 67.156px no-repeat`,
           }}
         >

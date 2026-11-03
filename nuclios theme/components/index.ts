@@ -36,6 +36,7 @@ export {
   type MenuEntry,
   type AccordionItemData,
 } from "./overlays";
+export { SidePanel, type SidePanelProps } from "./side-panel";
 export { DataTable, type Column, type DataTableProps } from "./table";
 export { TopNav, SideNav, type NavItem } from "./navigation";
 export { Avatar, initials, type AvatarProps } from "./avatar";

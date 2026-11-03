@@ -43,6 +43,8 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // dist/ and docs/ are build outputs — rebuilding them must not reload the dev server.
+  server: { watch: { ignored: ["**/dist/**", "**/docs/**"] } },
   build:
     mode === "file"
       ? { rollupOptions: { output: { codeSplitting: false } }, modulePreload: false }

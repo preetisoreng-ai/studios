@@ -111,8 +111,7 @@ const DEFAULT_ADVANCED: AdvancedField[] = [
 ];
 
 /** "Applications" → "Application", "Business Strategies" → "Business Strategy". */
-const singular = (t: string) =>
-  t.replace(/ies$/, "y").replace(/([^s])s$/, "$1");
+const singular = (t: string) => t.replace(/ies$/, "y").replace(/([^s])s$/, "$1");
 
 const opts = (xs: string[]): DropdownOption[] => xs.map((x) => ({ value: x, label: x }));
 const EMPTY = { workspace: "", project: "", industry: "", function: "", name: "", description: "" };
@@ -131,12 +130,15 @@ export function CreateArtifactModal({
   onOpenChange,
   featureId,
   featureTitle,
+  defaults,
   onSave,
 }: {
   open: boolean;
   onOpenChange: (o: boolean) => void;
   featureId: string;
   featureTitle: string;
+  /** Pre-fill, e.g. when creating from a project page. */
+  defaults?: { workspace?: string; project?: string };
   onSave: (a: NewArtifact) => void;
 }) {
   const [v, setV] = React.useState<Core>(EMPTY);
@@ -147,18 +149,20 @@ export function CreateArtifactModal({
   // Fresh form every time the popup opens.
   React.useEffect(() => {
     if (open) {
-      setV(EMPTY);
+      setV({ ...EMPTY, workspace: defaults?.workspace ?? "", project: defaults?.project ?? "" });
       setAdv({});
       setShowAdvanced(false);
       setTried(false);
     }
-  }, [open, featureId]);
+  }, [open, featureId, defaults?.workspace, defaults?.project]);
 
   const set = (k: keyof Core) => (val: string) => setV((s) => ({ ...s, [k]: val }));
   const err = (k: keyof Core) => (tried && !v[k].trim() ? "Required" : undefined);
-  const projects = v.workspace
-    ? PROJECT_OPTIONS[v.workspace] ?? []
+  const listed = v.workspace
+    ? (PROJECT_OPTIONS[v.workspace] ?? [])
     : Object.values(PROJECT_OPTIONS).flat();
+  // Keep a pre-filled project selectable even if it isn't in the dummy list.
+  const projects = v.project && !listed.includes(v.project) ? [v.project, ...listed] : listed;
   const advanced = ADVANCED[featureId] ?? DEFAULT_ADVANCED;
 
   const save = () => {
@@ -245,7 +249,7 @@ export function CreateArtifactModal({
           id="ca-description"
           label="Description"
           required
-                    placeholder="What is it for?"
+          placeholder="What is it for?"
           value={v.description}
           onChange={(e) => set("description")(e.target.value)}
           error={err("description")}

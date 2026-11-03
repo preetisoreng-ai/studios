@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "./theme-tokens.css";
 
+/* docs/ is a copy of the standalone build for GitHub Pages (1 MB of inlined HTML/JS).
+   Keep Tailwind from scanning it — it slows every dev reload and rebuilds re-trigger HMR. */
+@source not "../docs";
+
 /* NucliOS theme (tokens + components) and the Studios page theme.
    Components never carry colour; it all comes from these theme files. */
 @import "./theme/theme-nuclios.css";

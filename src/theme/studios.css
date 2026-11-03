@@ -95,6 +95,13 @@
   --studios-view-icon: var(--color-icons-primary-selected);
   --studios-view-btn-on: var(--color-background-neutral);
   --studios-view-btn-shadow: 0 1px 3px rgb(34 0 71 / 0.12);
+  /* Admin role chips (Figma 2014:13240). Admin + text are NucliOS primitives; Contributor
+     (#ebf4ff "surface/chips") and Reader (#e8f3e9 "surface/toast-success") have no NucliOS match. */
+  --studios-role-admin: var(--nuclios-reddish-pink-100);
+  --studios-role-contributor: #ebf4ff;
+  --studios-role-reader: #e8f3e9;
+  --studios-role-text: var(--nuclios-primary-900);
+  --studios-role-count: var(--color-background-neutral);
   /* Illustration palette — Figma artwork colours with no NucliOS token equivalent. */
   --studios-glow-from: #f9f6ff;
   --studios-glow-to: #fdf5ea;
@@ -179,6 +186,11 @@
 
 .dark .theme-nuclios,
 .theme-nuclios.dark {
+  --studios-role-admin: rgb(240 140 160 / 0.22);
+  --studios-role-contributor: rgb(110 160 255 / 0.24);
+  --studios-role-reader: rgb(110 200 130 / 0.22);
+  --studios-role-text: var(--color-text-neutral);
+  --studios-role-count: var(--color-surface-30-inverse);
   --studios-app-icon-hover-bg: var(--color-surface-70-static);
   --studios-app-icon-hover: var(--color-icons-primary-static);
   --studios-page-bg: var(--color-surface-surface-1);
@@ -896,4 +908,67 @@
 }
 .studios-scroll {
   scrollbar-width: thin;
+}
+
+/* Drawer motion (NucliOS Drawer / Radix Dialog, styled here so the base component stays
+   untouched). The panel slides in from the right and the scrim fades over the page;
+   Radix waits for the closing animation, so both reverse smoothly on close.
+   The global prefers-reduced-motion rule in index.css turns this off. */
+@keyframes studios-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes studios-scrim-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes studios-drawer-in {
+  from {
+    transform: translateX(calc(100% + 24px));
+  }
+}
+@keyframes studios-drawer-out {
+  to {
+    transform: translateX(calc(100% + 24px));
+  }
+}
+/* Scrim (shared by Drawer and Modal overlays). */
+[data-state][class*="bg-(--color-surface-30-inverse-static)"] {
+  backdrop-filter: blur(1.5px);
+}
+[data-state="open"][class*="bg-(--color-surface-30-inverse-static)"] {
+  animation: studios-scrim-in 320ms ease-out both;
+}
+[data-state="closed"][class*="bg-(--color-surface-30-inverse-static)"] {
+  animation: studios-scrim-out 260ms ease-in both;
+}
+/* Drawer panel (right side: the only Drawer content that pins inset-y + right). */
+[role="dialog"][data-state="open"][class*="inset-y-"][class*="right-"] {
+  animation: studios-drawer-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}
+[role="dialog"][data-state="closed"][class*="inset-y-"][class*="right-"] {
+  animation: studios-drawer-out 280ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+/* SidePanel (docked left of a Drawer): eases out from behind the drawer. */
+@keyframes studios-sidepanel-in {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+@keyframes studios-sidepanel-out {
+  to {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+[data-side-panel][data-state="open"] {
+  animation: studios-sidepanel-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+[data-side-panel][data-state="closed"] {
+  animation: studios-sidepanel-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
 }
